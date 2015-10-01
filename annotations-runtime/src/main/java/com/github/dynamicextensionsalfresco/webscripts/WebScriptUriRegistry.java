@@ -111,7 +111,7 @@ public class WebScriptUriRegistry implements UriIndex, BeanPostProcessor, Initia
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.state(StringUtils.hasText(uriIndexBeanName), "Name of UriIndex bean not configured.");
+		//Assert.state(StringUtils.hasText(uriIndexBeanName), "Name of UriIndex bean not configured.");
 	}
 
 	@Override

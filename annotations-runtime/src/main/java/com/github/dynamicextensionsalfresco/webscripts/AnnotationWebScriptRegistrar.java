@@ -17,7 +17,7 @@ public class AnnotationWebScriptRegistrar implements ApplicationContextAware {
 	private AnnotationWebScriptBuilder annotationBasedWebScriptBuilder;
 
 	private WebScriptUriRegistry webScriptUriRegistry;
-
+	
 	/* State */
 
 	private final List<WebScript> webScripts = new ArrayList<WebScript>();

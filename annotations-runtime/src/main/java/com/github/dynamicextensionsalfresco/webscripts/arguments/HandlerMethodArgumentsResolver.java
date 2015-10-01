@@ -1,7 +1,5 @@
 package com.github.dynamicextensionsalfresco.webscripts.arguments;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -32,8 +30,6 @@ public class HandlerMethodArgumentsResolver implements ApplicationContextAware {
 
 	private StringValueConverter stringValueConverter;
 
-    private BundleContext bundleContext;
-
 	/* Configuration */
 
 	private List<ArgumentResolver<Object, Annotation>> argumentResolvers;
@@ -41,7 +37,6 @@ public class HandlerMethodArgumentsResolver implements ApplicationContextAware {
 	private final Map<ArgumentResolverKey, ArgumentResolver<Object, Annotation>> argumentResolverCache = new ConcurrentHashMap<ArgumentResolverKey, ArgumentResolver<Object, Annotation>>();
 
 	private final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
-    private ServiceTracker resolverTracker;
     private ApplicationContext applicationContext;
 
 	/* Main Operations */
@@ -64,11 +59,6 @@ public class HandlerMethodArgumentsResolver implements ApplicationContextAware {
 		argumentResolvers.add((ArgumentResolver) new HttpServletRequestArgumentResolver());
 		argumentResolvers.add((ArgumentResolver) new HttpServletResponseArgumentResolver());
 		argumentResolvers.add((ArgumentResolver) new JsonObjectArgumentResolver());
-
-        if (bundleContext != null) {
-            resolverTracker = new ServiceTracker(bundleContext, ArgumentResolver.class, null);
-            resolverTracker.open(true);
-        }
     }
 
     /**
@@ -145,21 +135,6 @@ public class HandlerMethodArgumentsResolver implements ApplicationContextAware {
             }
         }
 
-        // osgi resolvers
-        if (resolverTracker != null) {
-            // check for Osgi additions
-            final Object[] services = resolverTracker.getServices();
-            if (services != null) {
-                for (Object service : services) {
-                    final ArgumentResolver<Object,Annotation> argumentResolver = (ArgumentResolver<Object,Annotation>)service;
-                    if (argumentResolver.supports(parameterType, annotationType)) {
-                        // cannot cache these due to dynamic nature
-                        return argumentResolver;
-                    }
-                }
-            }
-        }
-
 		// static resolvers
 		for (final ArgumentResolver<Object, Annotation> argumentResolver : argumentResolvers) {
 			if (argumentResolver.supports(parameterType, annotationType)) {
@@ -180,10 +155,6 @@ public class HandlerMethodArgumentsResolver implements ApplicationContextAware {
 	protected StringValueConverter getStringValueConverter() {
 		return stringValueConverter;
 	}
-
-    public void setBundleContext(BundleContext bundleContext) {
-        this.bundleContext = bundleContext;
-    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

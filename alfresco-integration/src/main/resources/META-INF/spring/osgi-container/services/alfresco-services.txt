@@ -1,6 +1,0 @@
-# Services used by the current implementation of DynamicExtensionsApplicationContext
-# The implementation will most likely change in the future, making this configuration redundant.
-
-DescriptorService:org.alfresco.service.descriptor.DescriptorService
-webscripts.repo.templateprocessor:org.springframework.extensions.webscripts.TemplateProcessor
-NamespaceService:org.alfresco.service.namespace.NamespacePrefixResolver

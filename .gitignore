@@ -4,14 +4,5 @@
 *.sh
 *.bat
 target
-tmp
-*.sublime-project
-*.sublime-workspace
-*.iml
-*.ipr
-*.iws
-build
-out
-*.hprof
 *.log
-.gradle
+alf_data_dev
