@@ -1,8 +1,8 @@
 <webscript>
-    <shortname>Annotated Web Scripts</shortname>
-    <description>Displays Web Scripts created using annotations</description>
+    <shortname>Annotations Based Web Scripts</shortname>
+    <description>Displays annotations based Web Scripts</description>
     <url>/annotatedws</url>
     <authentication>admin</authentication>
-    <family>@@@ Annotated Webscripts @@@</family>
+    <family>@@@ Annotations Based @@@</family>
     <format default="html"></format>
 </webscript>

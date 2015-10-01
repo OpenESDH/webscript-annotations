@@ -18,7 +18,7 @@
 -->
 <beans>
 	<bean id="webscript.annotatedWebScripts.get"
-          class="com.github.dynamicextensionsalfresco.webscripts.DisplayAnnotatedWebScripts"
+          class="com.github.dynamicextensionsalfresco.webscripts.admin.AnnotationsBasedWebScriptsHome"
           parent="webscript">
           <property name="webScriptUriRegistry" ref="annotation.runtime.WebScriptUriRegistry" />
     </bean>

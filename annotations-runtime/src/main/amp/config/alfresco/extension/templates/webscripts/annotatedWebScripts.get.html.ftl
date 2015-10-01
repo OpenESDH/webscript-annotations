@@ -3,48 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <body>
       <div>
-          <h2>Annotated Web Scripts</h2>
+          <h2>Annotations Based Web Scripts</h2>
+          <a href="${url.serviceContext}/index">Back to Alfresco Web Scripts Home</a>
           <br/>
           <#if webScripts?size == 0>
-            No registered annotated web scripts 
+            No registered annotations based web scripts 
           </#if>
+          <br/>
+          <br/>
           <#if webScripts?size &gt; 0>
-                 <#list webScripts as webscript>
-                    
-                    <#assign desc = webscript.description>
-                    
-                    <span class="mainSubTitle">${desc.shortName}</span>
-                    
-                    <table>
-                       <#list desc.URIs as uri>
-                       <tr><td><a href="${url.serviceContext}${uri?html}">${desc.method?html} ${url.serviceContext}${uri?html}</a></td></tr>
-                       </#list>
-                    </table>
-                    
-                    <#if desc.description??>
-                        <table>
-                           <tr><td>---</td></tr>
-                           <tr><td>${desc.description}</td></tr>
-                           <tr><td>---</td></tr>
-                        </table>
-                    </#if>
-                    
-                    <table>
-                       <tr><td>Authentication:</td><td>${desc.requiredAuthentication}</td></tr>
-                       <tr><td>Transaction:</td><td>${desc.requiredTransaction}</td></tr>
-                       <tr><td>Format Style:</td><td>${desc.formatStyle}</td></tr>
-                       <tr><td>Default Format:</td><td>${desc.defaultFormat!"<i>Determined at run-time</i>"}</td></tr>
-                       
-                        <#if desc.lifecycle != 'none'>
-                            <tr><td>Lifecycle:</td><td>${desc.lifecycle}</td></tr>
-                        </#if>
-                        
-                       <tr><td></td></tr>
-                    </table>
-                    
-                    <br/>
-                    
-                 </#list>  
+                 <a href="${url.serviceContext}/annotatedws/all">Browse all Annotations Based Web Scripts</a>
+                 <br/>
+                 <br/>
+                 <#list wsFamilies as family>
+                    <p><a href="${url.serviceContext}/annotatedws/family/${family}">Browse '${family}' Web Scripts</a></p>
+                 </#list>
           </#if> 
       </div>
    </body>

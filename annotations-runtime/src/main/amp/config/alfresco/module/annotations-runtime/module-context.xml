@@ -24,7 +24,7 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     
     <context:annotation-config/>
-    <context:component-scan base-package="com.jr" />
+    <context:component-scan base-package="com.github.dynamicextensionsalfresco.webscripts.admin" />
 
 	<!-- This is filtered by Maven at build time, so that module name is single sourced. -->
     <import resource="classpath:alfresco/module/${project.artifactId}/context/service-context.xml" />

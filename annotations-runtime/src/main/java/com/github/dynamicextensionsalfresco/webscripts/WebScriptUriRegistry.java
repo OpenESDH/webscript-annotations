@@ -2,8 +2,10 @@ package com.github.dynamicextensionsalfresco.webscripts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -132,7 +134,15 @@ public class WebScriptUriRegistry implements UriIndex, BeanPostProcessor, Initia
 	public List<WebScript> getWebScripts() {
 		return webScripts;
 	}
-
+	
+	public Set<String> getWebScriptFamilies(){
+	    Set<String> allFamilies = new HashSet<String>();
+	    webScripts.stream()
+	        .map(webScript -> webScript.getDescription().getFamilys())
+	        .forEach(wsFamilies -> allFamilies.addAll(wsFamilies));
+	    return allFamilies;
+	}
+	
 	/* Remaining delegated operations */
 
 	@Override
