@@ -104,7 +104,7 @@ public class AnnotationWebScriptBuilder implements BeanFactoryAware{
 			if (method.getReturnType() == Void.TYPE) {
                 throw new RuntimeException("@Attribute methods cannot have a void return type.");
             }
-            handlerMethods.getBeforeMethods().add(method);
+            handlerMethods.getAttributeMethods().add(method);
 		});
 		
 		ReflectionUtils.doWithMethods(beanType, (method) -> {
