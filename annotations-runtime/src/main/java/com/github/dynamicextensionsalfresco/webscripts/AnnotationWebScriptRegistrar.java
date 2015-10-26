@@ -25,12 +25,20 @@ public class AnnotationWebScriptRegistrar implements ApplicationContextAware {
 	/* Main operations */
 
 	public void registerWebScripts() {
+	    System.out.println("------- registering webscripts");
 		for (final String beanName : applicationContext.getBeanDefinitionNames()) {
-			for (final WebScript webScript : annotationBasedWebScriptBuilder.createWebScripts(beanName)) {
-				webScriptUriRegistry.registerWebScript(webScript);
-				webScripts.add(webScript);
-			}
+		    try{
+    			for (final WebScript webScript : annotationBasedWebScriptBuilder.createWebScripts(beanName)) {
+    				webScriptUriRegistry.registerWebScript(webScript);
+    				webScripts.add(webScript);
+    			}
+		    }catch(NoClassDefFoundError error){
+		        System.out.println("\n\nERROR: while registering webscript for the bean: " + beanName);
+		        error.printStackTrace();
+		        throw error;
+		    }
 		}
+		System.out.println("------- registered: " + webScripts.size());
 	}
 
 	public void unregisterWebScripts() {
