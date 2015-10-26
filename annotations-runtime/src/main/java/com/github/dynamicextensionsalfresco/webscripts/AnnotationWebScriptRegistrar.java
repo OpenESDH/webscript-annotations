@@ -33,9 +33,9 @@ public class AnnotationWebScriptRegistrar implements ApplicationContextAware {
     				webScripts.add(webScript);
     			}
 		    }catch(NoClassDefFoundError error){
-		        System.out.println("\n\nERROR: while registering webscript for the bean: " + beanName);
-		        error.printStackTrace();
-		        throw error;
+		        NoClassDefFoundError er = new NoClassDefFoundError("\n\nERROR: while registering webscript for the bean: " + beanName);
+		        er.addSuppressed(error);
+		        throw er;
 		    }
 		}
 		System.out.println("------- registered: " + webScripts.size());
