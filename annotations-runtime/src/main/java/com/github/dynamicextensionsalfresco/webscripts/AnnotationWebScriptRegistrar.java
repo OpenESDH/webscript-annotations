@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.extensions.webscripts.WebScript;
 
 public class AnnotationWebScriptRegistrar implements ApplicationContextAware {
+    
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	/* Dependencies */
 
@@ -25,7 +29,7 @@ public class AnnotationWebScriptRegistrar implements ApplicationContextAware {
 	/* Main operations */
 
 	public void registerWebScripts() {
-	    System.out.println("------- registering webscripts");
+	    logger.info("Registering annotation based web scripts");
 		for (final String beanName : applicationContext.getBeanDefinitionNames()) {
 		    try{
     			for (final WebScript webScript : annotationBasedWebScriptBuilder.createWebScripts(beanName)) {
@@ -38,7 +42,7 @@ public class AnnotationWebScriptRegistrar implements ApplicationContextAware {
 		        throw er;
 		    }
 		}
-		System.out.println("------- registered: " + webScripts.size());
+		logger.info("Registered annotation based web scripts: " + webScripts.size());
 	}
 
 	public void unregisterWebScripts() {
